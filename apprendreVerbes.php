@@ -126,7 +126,7 @@ switch($action)
                 else $nbErreur++;
                         
             if(isset($_POST['l'.$i.'c2']))
-                if($_POST['l'.$i.'c2'] == $array[$i]['v_preterit'])$note += 0.25;
+                if($_POST['l'.$i.'c2'] == $array[$i]['v_preterit']) $note += 0.25;
                 else $nbErreur++;
                 
                 
@@ -158,21 +158,21 @@ switch($action)
                 echo '<div class="row-fluid"><div class="span3">';
                 echo '<input type="hidden" name="vid'.$i.'" value="'.$ligne['v_id'].'" />';
                 if($choix == 1) echo "<input type='hidden' name='s".$i."' value='".$ligne['v_base_verbale']."' />".$ligne['v_base_verbale'];
-                else echo "<input type='text' size = '10' name='l".$i."c1' />";
+                else echo "<input type='text' name='l".$i."c1'  class='input-small'/>";
                  echo '</div>';
                 
                 echo '<div class="span3">';
                 if($choix == 2) echo "<input type='hidden' name='s".$i."' value='".$ligne['v_preterit']."' />".$ligne['v_preterit'];
-                else echo "<input type='text' name='l".$i."c2' />";
+                else echo "<input type='text' name='l".$i."c2'  class='input-small'/>";
                 echo '</div>';
                 
                 echo '<div class="span3">';
                 if($choix == 3) echo "<input type='hidden' name='s".$i."' value='".$ligne['v_participe_passe']."' />".$ligne['v_participe_passe'];
-                else echo "<input type='text' name='l".$i."c3' />";
+                else echo "<input type='text' name='l".$i."c3'  class='input-small'/>";
                  echo '</div>';
                 echo '<div class="span3">';
                 if($choix == 4) echo "<input type='hidden' name='s".$i."' value='".$ligne['v_traduction']."' />".$ligne['v_traduction'];
-                else echo "<input type='text' name='l".$i."c4' />";
+                else echo "<input type='text' name='l".$i."c4'  class='input-small' />";
                 
                 echo '</div></div>';
                 echo "<br />";
@@ -197,21 +197,21 @@ switch($action)
                 $choix = mt_rand(1,4);
                 echo '<div class="row-fluid"><div class="span3">';
                 if($choix == 1) echo "<input type='hidden' name='s".$i."' value='".$ligne['v_base_verbale']."' />".$ligne['v_base_verbale'];
-                else echo "<input type='text' size = '10' name='l".$i."c1' />";
+                else echo "<input type='text' name='l".$i."c1'  class='span11' />";
                  echo '</div>';
                 
                 echo '<div class="span3">';
                 if($choix == 2) echo "<input type='hidden' name='s".$i."' value='".$ligne['v_preterit']."' />".$ligne['v_preterit'];
-                else echo "<input type='text' name='l".$i."c2' />";
+                else echo "<input type='text' name='l".$i."c2'  class='span11' />";
                 echo '</div>';
                 
                 echo '<div class="span3">';
                 if($choix == 3) echo "<input type='hidden' name='s".$i."' value='".$ligne['v_participe_passe']."' />".$ligne['v_participe_passe'];
-                else echo "<input type='text' name='l".$i."c3' />";
+                else echo "<input type='text' name='l".$i."c3'  class='span11' />";
                  echo '</div>';
                 echo '<div class="span3">';
                 if($choix == 4) echo "<input type='hidden' name='s".$i."' value='".$ligne['v_traduction']."' />".$ligne['v_traduction'];
-                else echo "<input type='text' name='l".$i."c4' />";
+                else echo "<input type='text' name='l".$i."c4'  class='span11' />";
                  echo '</div></div>';
                 echo "<br />";
                 $i++;

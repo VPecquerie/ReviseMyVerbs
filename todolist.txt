@@ -1,8 +1,5 @@
 FINIR CREATIVITE NUMERIQUE
 --> stat
-message affiche : masquage auto
 pagination pour la liste des verbes ? 
-bug affichage format tablette sur formulaire 
 bug correction + revoir algorythme de correction
 ajout d'un deuxieme mode de test
-message de confirmation de la modif de niveau bof bof ...
