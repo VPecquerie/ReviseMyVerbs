@@ -7,7 +7,7 @@ require_once("bdd.php");
 <html lang="fr">
   <head>
     <meta charset="utf-8">
-    <title><?php if(isset($titre)) echo $titre; else echo "ReviseMyVerbs"; ?></title>
+    <title><?php if(isset($titre)) echo $titre; else echo "Revise my Verbs"; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Apprentissage, Verbes Irréguliers, Verbes, Anglais, Irregular Verbs">
     <meta name="author" content="Vincent Pecquerie">
@@ -32,7 +32,7 @@ require_once("bdd.php");
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">ReviseMyVerb</a>
+          <a class="brand" href="#">Revise my Verbs</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li <?php if($onglet=="accueil") echo 'class="active"'; ?>><a href="index.php">Accueil</a></li>

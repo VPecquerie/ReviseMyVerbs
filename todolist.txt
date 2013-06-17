@@ -4,8 +4,5 @@ pouvoir fermer les message affiche / masquage auto
 pagination pour la liste des verbes ? 
 bug affichage format tablette sur formulaire 
 bug correction + revoir algorythme de correction
-modifier titre principal
 ajout d'un deuxieme mode de test
-verif changements de mot de passe pour compte test 
 message de confirmation de la modif de niveau bof bof ...
-ajout d'un message de confirmation pour la déconnexion
