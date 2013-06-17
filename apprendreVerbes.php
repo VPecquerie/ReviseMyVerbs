@@ -13,42 +13,35 @@ switch($action)
         require_once 'includes/haut.php';
         $array = $_SESSION['listeVerbe'];
         $score = $_POST['score'];
-        
+		$nbErreur = 0;
         for($i = 5; $i <= 10; $i++)
         {
             $note = 0;
-            
+           
             if(isset($_POST['l'.$i.'c1']))
                 if($_POST['l'.$i.'c1'] == $array[$i]['v_base_verbale'])  $note += 0.25;
-                else
-                    if(isset($_SESSION['nbErreur'][$i])) $_SESSION['nbErreur'][$i] += 1; 
-                    else $_SESSION['nbErreur'][$i] = 1; 
-                        
+                else $nbErreur++;
+                
             if(isset($_POST['l'.$i.'c2']))
                 if($_POST['l'.$i.'c2'] == $array[$i]['v_preterit'])$note += 0.25;
-                else
-                    if(isset($_SESSION['nbErreur'][$i])) $_SESSION['nbErreur'][$i] += 1; 
-                    else $_SESSION['nbErreur'][$i] = 1; 
+                else $nbErreur++;
                 
             if(isset($_POST['l'.$i.'c3']))
                 if($_POST['l'.$i.'c3'] == $array[$i]['v_participe_passe']) $note += 0.25; 
-                else
-                    if(isset($_SESSION['nbErreur'][$i])) $_SESSION['nbErreur'][$i] += 1; 
-                    else $_SESSION['nbErreur'][$i] = 1; 
+                else $nbErreur++;
                 
             if(isset($_POST['l'.$i.'c4']))
                 if($_POST['l'.$i.'c4'] == $array[$i]['v_traduction'])  $note += 0.25; 
-                else
-                    if(isset($_SESSION['nbErreur'][$i])) $_SESSION['nbErreur'][$i] += 1; 
-                    else $_SESSION['nbErreur'][$i] = 1; 
+                else $nbErreur++;
                       
             if($note == 0.75) $note = 1;
             
             $score += $note;    
-
         }
+        
+        $nbErreur += intval($_SESSION['nbErreur']);
         ?>
-        <p>Nous avez fait : <?php echo array_sum($_SESSION['nbErreur']); ?> erreur(s). <br /> Note : <?php echo $score; ?> / 10</p>
+        <p>Nous avez fait : <?php echo $nbErreur; ?> erreur(s). <br /> Note : <?php echo $score; ?> / 10</p>
         <div class="row-fluid">
         <?php
         $array = array('', 'v_base_verbale','v_preterit','v_participe_passe', 'v_traduction');
@@ -62,18 +55,18 @@ switch($action)
                 if(isset($_SESSION['form']['l'.$i.'c'.$j]) and !empty($_SESSION['form']['l'.$i.'c'.$j]))
                 {
                     if($comparant[$i][$array[$j]] != $_SESSION['form']['l'.$i.'c'.$j])
-                    echo '<div span class="span3" style="color: red;">'.$_SESSION['form']['l'.$i.'c'.$j].'<span style="color: black;"> au lieu de </span><span style="color: blue;">'.$comparant[$i][$array[$j]].'</span</div>';
+                    echo '<div class="span3" style="color: red;">'.$_SESSION['form']['l'.$i.'c'.$j].'<span style="color: black;"> au lieu de </span><span style="color: blue;">'.$comparant[$i][$array[$j]].'</span></div>';
                     else
-                    echo '<div span class="span3" style="color: blue;">'.$_SESSION['form']['l'.$i.'c'.$j].'</div>';    
+                    echo '<div class="span3" style="color: blue;">'.$_SESSION['form']['l'.$i.'c'.$j].'</div>';    
                         
                 }
                 else if(isset($_SESSION['form']['s'.$i]) && $_SESSION['form']['s'.$i] == $comparant[$i][$array[$j]])
                 {
-                    echo '<div span class="span3" style="color: black;">'.$comparant[$i][$array[$j]].'</div>';     
+                    echo '<div class="span3" style="color: black;">'.$comparant[$i][$array[$j]].'</div>';     
                 }
                 else
                 {
-                    echo '<div span class="span3" style="color: grey;">'.$comparant[$i][$array[$j]].'</div>';                     
+                    echo '<div class="span3" style="color: grey;">'.$comparant[$i][$array[$j]].'</div>';                     
                 }
                    
             }
@@ -121,9 +114,8 @@ switch($action)
         // First Step Récuperation du nombre de bonnes réponses :
         require_once 'includes/haut.php';
         $array = $_SESSION['listeVerbe'];
-        $_SESSION['nbErreur'] = array();
         $_SESSION['form'] = $_POST;
-       
+       	$nbErreur = 0;
         $score = 0;
         for($i = 0; $i < 5; $i++)
         {
@@ -131,36 +123,29 @@ switch($action)
             
             if(isset($_POST['l'.$i.'c1']))
                 if($_POST['l'.$i.'c1'] == $array[$i]['v_base_verbale'])  $note += 0.25;
-                else 
-                    if(isset($_SESSION['nbErreur'][$i])) $_SESSION['nbErreur'][$i] += 1; 
-                    else $_SESSION['nbErreur'][$i] = 1; 
+                else $nbErreur++;
                         
             if(isset($_POST['l'.$i.'c2']))
                 if($_POST['l'.$i.'c2'] == $array[$i]['v_preterit'])$note += 0.25;
-                else
-                    if(isset($_SESSION['nbErreur'][$i])) $_SESSION['nbErreur'][$i] += 1; 
-                    else $_SESSION['nbErreur'][$i] = 1; 
+                else $nbErreur++;
                 
                 
             if(isset($_POST['l'.$i.'c3']))
                 if($_POST['l'.$i.'c3'] == $array[$i]['v_participe_passe']) $note += 0.25; 
-                else
-                    if(isset($_SESSION['nbErreur'][$i])) $_SESSION['nbErreur'][$i] += 1; 
-                    else $_SESSION['nbErreur'][$i] = 1; 
+                else $nbErreur++;
                 
                 
             if(isset($_POST['l'.$i.'c4']))
                 if($_POST['l'.$i.'c4'] == $array[$i]['v_traduction'])  $note += 0.25; 
-                else
-                    if(isset($_SESSION['nbErreur'][$i])) $_SESSION['nbErreur'][$i] += 1; 
-                    else $_SESSION['nbErreur'][$i] = 1; 
+                else $nbErreur++;
                 
                       
             if($note == 0.75) $note = 1;
             
             $score += $note;    
-            
-        }
+         
+        }   
+        $_SESSION['nbErreur'] = $nbErreur;
         ?>
         <form action="?action=verif" method="POST">
         <?php

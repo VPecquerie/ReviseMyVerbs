@@ -1,6 +1,6 @@
 FINIR CREATIVITE NUMERIQUE
 --> stat
-Bug : redondance d'information !
+augmentation du nombre d'erreur si actualisation... 
 Cacher le message d'information si connecte
 pouvoir fermer les message affiche / masquage auto
 pagination pour la liste des verbes ? 

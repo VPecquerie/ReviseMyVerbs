@@ -13,11 +13,14 @@ if(isset($code) && $code != 0)
             switch($code)
             {
                 case 1: 
-                    echo  "Connexion éffectuée avec succès !";
+                    echo  "Connexion effectuée avec succès !";
                 break;
                 
                 case 2:
-                    echo "Modifications éfféctuées avec succès !";
+                    echo "Modifications efféctuées avec succès !";
+                break;
+                case 3:
+                	echo  "Déconnexion effectuée avec succès !";
                 break;
             }
             ?>
@@ -26,10 +29,11 @@ if(isset($code) && $code != 0)
 <?php 
 } 
 ?>
+<?php if(!isset($_SESSION['pseudo']) OR !isset($_SESSION['id'])) { ?>
 <p class="bienvenue">
     Bienvenue sur ReviseMyVerb ! Ce site est une application dédiée à l’apprentissage des verbes irréguliers. Pour l'utiliser, vous devez vous inscrire sur <a href="inscription.php">la page d’inscription</a> ou vous pouvez aussi utiliser le compte de démo (nom d’utilisateur <b>login</b> et mot de passe <b>motdepasse</b>) pour tester l’application. Les comptes personnels permettent un suivi individuel.
 </p>
-
+<?php } ?>
 <?php
 while ($ligne = $requete->fetch())
 {
