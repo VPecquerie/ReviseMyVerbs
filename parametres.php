@@ -20,7 +20,7 @@ switch($action)
 					<fieldset>
 					 <?php 
 					 if(isset($_GET['erreur']))
-					 $code = intval($_GET['erreur']);
+					 	 $code = intval($_GET['erreur']);
 					 if(isset($code) && $code != 0) 
 		             { 
 		       		 ?>
