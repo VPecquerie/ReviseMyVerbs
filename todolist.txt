@@ -1,12 +1,9 @@
 FINIR CREATIVITE NUMERIQUE
 --> stat
-augmentation du nombre d'erreur si actualisation... 
-Cacher le message d'information si connecte
 pouvoir fermer les message affiche / masquage auto
 pagination pour la liste des verbes ? 
 bug affichage format tablette sur formulaire 
 bug correction + revoir algorythme de correction
-ajout du test final
 modifier titre principal
 ajout d'un deuxieme mode de test
 verif changements de mot de passe pour compte test 
