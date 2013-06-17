@@ -1,9 +1,5 @@
-$(document).ready(timerMessage(10000));
+console.log("Chargement du fichier ui.js");
 
-
-function timerMessage(time) {
-console.log("Entrer dans timerMessage()");
-console.log('time = '+time);
-$("#MessageAffichage").hide();
-console.log('Sortie de timerMessage()');
-}
+$(document).ready(function() {
+	$(".alert").delay(5000).hide("slow");
+	});

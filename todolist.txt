@@ -1,6 +1,6 @@
 FINIR CREATIVITE NUMERIQUE
 --> stat
-pouvoir fermer les message affiche / masquage auto
+message affiche : masquage auto
 pagination pour la liste des verbes ? 
 bug affichage format tablette sur formulaire 
 bug correction + revoir algorythme de correction
