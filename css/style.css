@@ -1,0 +1,17 @@
+body 
+{
+
+    padding-top: 60px;
+}
+html
+{
+        overflow: auto;
+}
+.bienvenue
+{
+	text-align: justify;
+	border: 2px solid silver;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: whiteSmoke;	
+}
