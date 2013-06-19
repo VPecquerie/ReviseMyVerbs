@@ -2,7 +2,7 @@
 $titre = "Liste des verbes";
 $onglet = "liste";
 require_once("includes/haut.php");
-$requete = "SELECT * FROM verbes WHERE v_niveau <= ".intval($_SESSION['niveau']);
+$requete = "SELECT * FROM verbes WHERE v_niveau <= ".intval($_SESSION['niveau'])." ORDER BY v_base_verbale ASC";
 $retour = $connexion->query($requete)or die("Action impossible !");
 $retour->setFetchMode(PDO::FETCH_OBJ)or die("Action impossible !");
 if($retour->rowCount() > 0)
@@ -14,7 +14,7 @@ if($retour->rowCount() > 0)
             <thead>
             <tr>
 
-                    <th>Base Verbale</th>
+                    <th>Base verbale</th>
                     <th>Prétérit</th>
                     <th>Participe passé</th>
                     <th>Traduction</th>

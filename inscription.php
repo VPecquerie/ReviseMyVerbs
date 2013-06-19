@@ -97,7 +97,7 @@ if(!isset($_POST['pseudo']))
                        
                             <select name="niveau">
                                 <?php while($data = $retour->fetch()) { ?>                
-                                    <option value="<?php echo $data->n_id; ?>" <?php if($_SESSION['niveau'] == $data->n_id) echo "selected" ?>>
+                                    <option value="<?php echo $data->n_id; ?>">
                                         <?php echo $data->n_titre; ?>
                                     </option>
                                 <?php } ?>
