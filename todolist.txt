@@ -1,6 +1,6 @@
 FINIR CREATIVITE NUMERIQUE
 --> stat
 pagination pour la liste des verbes ? 
-bug correction + revoir algorythme de correction
 ajout d'un deuxieme mode de test ?
+ajout apprendre si bonne réponse
 

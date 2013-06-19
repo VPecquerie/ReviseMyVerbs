@@ -1,20 +1,30 @@
 <?php 
 $titre = "Apprendre des verbes";
 $onglet = "apprendre";
+require_once 'includes/haut.php';
 if(isset($_GET['action']))
 $action = $_GET['action'];
 else 
 $action = null;
 
+        $requete = 'SELECT v_id FROM apprendre WHERE u_id = '.$_SESSION['id'];
+        $retour = $connexion->query($requete);
+        $retour->setFetchMode(PDO::FETCH_OBJ);
+        
+        while($ligne = $retour->fetch())
+            $verbesConnu[] = $ligne->v_id;
 
 switch($action)
 {
     case "verif":
-        require_once 'includes/haut.php';
         $array = $_SESSION['listeVerbe'];
         $score = $_POST['score'];
 		$nbErreur = 0;
-        for($i = 5; $i <= 10; $i++)
+        
+
+            
+        
+        for($i = 5; $i < 10; $i++)
         {
             $note = 0;
            
@@ -34,7 +44,27 @@ switch($action)
                 if($_POST['l'.$i.'c4'] == $array[$i]['v_traduction'] OR strpos($array[$i]['v_traduction'],$_POST['l'.$i.'c4']) !== FALSE)  $note += 0.25; 
                 else{  $nbErreur++; }
                       
-            if($note == 0.75) $note = 1;
+            if($note == 0.75) 
+            {   
+                $note = 1;
+                $id_verbe = $_POST['vid'.$i];
+                if(!in_array($id_verbe,$verbesConnu))
+                {
+                    $verbesConnu[] = $id_verbe;
+                    $requete = 'INSERT INTO apprendre VALUES('.$_SESSION['id'].','.intval($id_verbe).',1)';
+                }
+                else
+                {
+                    $requete = 'UPDATE apprendre SET nb_vu = nb_vu + 1 WHERE u_id = '.$_SESSION['id'].' AND v_id = '.intval($id_verbe);
+                }
+                $connexion->exec($requete);
+            }
+            else
+            {
+                $requete = 'DELETE FROM apprendre WHERE u_id = '.$_SESSION['id'].' AND v_id='.intval($_POST['vid'.$i]);
+                $connexion->exec($requete);
+                
+            }
             
             $score += $note;    
         }
@@ -44,6 +74,9 @@ switch($action)
         <p>Nous avez fait : <?php echo $nbErreur; ?> erreur(s). <br /> Note : <?php echo $score; ?> / 10</p>
         <div class="row-fluid">
         <?php
+        $requeteScore = 'INSERT INTO notes VALUES("",now(),'.$score.','.$_SESSION['id'].')';
+        $connexion->exec($requeteScore);
+        
         $array = array('', 'v_base_verbale','v_preterit','v_participe_passe', 'v_traduction');
         $comparant = $_SESSION['listeVerbe'];
         for($i = 0; $i < 5; $i++)
@@ -112,7 +145,7 @@ switch($action)
       
     case "test2":
         // First Step Récuperation du nombre de bonnes réponses :
-        require_once 'includes/haut.php';
+
         $array = $_SESSION['listeVerbe'];
         $_SESSION['form'] = $_POST;
        	$nbErreur = 0;
@@ -143,10 +176,29 @@ switch($action)
                 else $nbErreur++;
             }   
                       
-            if($note == 0.75) $note = 1;
+            if($note == 0.75)
+            {            $note = 1;
+            
+                            $id_verbe = $_POST['vid'.$i];
+                if(!in_array($id_verbe,$verbesConnu))
+                {
+                    $verbesConnu[] = $id_verbe;
+                    $requete = 'INSERT INTO apprendre VALUES('.$_SESSION['id'].','.intval($id_verbe).',1)';
+                }
+                else
+                {
+                    $requete = 'UPDATE apprendre SET nb_vu = nb_vu + 1 WHERE u_id = '.$_SESSION['id'].' AND v_id = '.intval($id_verbe);
+                }
+                $connexion->exec($requete);
             
             $score += $note;    
-         
+            }
+            else
+            {
+                $requete = 'DELETE FROM apprendre WHERE u_id = '.$_SESSION['id'].' AND v_id='.intval($_POST['vid'.$i]);
+                $connexion->exec($requete);
+                
+            }
         }   
         $_SESSION['nbErreur'] = $nbErreur;
         ?>
@@ -190,7 +242,6 @@ switch($action)
         break;
     
     case "test1":
-     require_once 'includes/haut.php';
             $i = 0;
             $retour = $_SESSION['listeVerbe'];
             echo '<form action="?action=test2" method="POST"><div class="row-fluid">';
@@ -199,6 +250,7 @@ switch($action)
                 
                 $choix = mt_rand(1,4);
                 echo '<div class="row-fluid"><div class="span3">';
+                 echo '<input type="hidden" name="vid'.$i.'" value="'.$ligne['v_id'].'" />';
                 if($choix == 1) echo "<input type='hidden' name='s".$i."' value='".$ligne['v_base_verbale']."' />".$ligne['v_base_verbale'];
                 else echo "<input type='text' name='l".$i."c1'  class='span11' />";
                  echo '</div>';
@@ -227,7 +279,6 @@ switch($action)
         break;
     
     case "verbe2":
-        require_once 'includes/haut.php';
         ?>
         <table class="table table-bordered table-striped table-condensed">
             <thead>
@@ -257,7 +308,6 @@ switch($action)
         break;
     
     case "verbe1":
-        require_once 'includes/haut.php';
         $retour = $_SESSION['listeVerbe'];
         ?>
         <table class="table table-bordered table-striped table-condensed">
@@ -284,8 +334,6 @@ switch($action)
            <?php
         break;
     default:        
-        @session_start();
-        require_once 'includes/haut.php';   
         $requete = "SELECT * FROM verbes WHERE RAND() > 0.9 AND v_id NOT IN(SELECT v_id FROM apprendre WHERE u_id = ".intval($_SESSION['id'])." and v_id NOT IN(SELECT v_id FROM apprendre WHERE u_id = ".intval($_SESSION['id'])." AND nb_vu > 5)) LIMIT 0,10";
        
         $retour = $connexion->query($requete);
