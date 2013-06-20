@@ -36,6 +36,10 @@ if(!isset($_POST['pseudo']) && !isset($_POST['pass']))
                            case 4:
                                echo "Le compte utilisateur est introuvable.";
                            break;
+                           
+                           case 5:
+                           		echo "Vous devez être connecté pour accéder à cette page !";
+                           	break;
                         }
                         ?>
                     </p>
