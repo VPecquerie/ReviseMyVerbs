@@ -2,12 +2,21 @@
 @session_start(); 
 if(empty($onglet)) $onglet = "accueil";
 require_once("bdd.php");
+function is_connecte()
+{
+	if(!isset($_SESSION['id']))
+	{
+		header("location: connexion.php?code=5");
+		return false;	
+	}
+	else return true;
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="utf-8">
-    <title><?php if(isset($titre)) echo $titre; else echo "Revise my Verbs"; ?></title>
+    <title><?php if(isset($titre)) echo $titre; else echo "ReviseMyVerbs"; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Apprentissage, Verbes Irréguliers, Verbes, Anglais, Irregular Verbs">
     <meta name="author" content="Vincent Pecquerie">
@@ -32,7 +41,7 @@ require_once("bdd.php");
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Revise my Verbs</a>
+          <a class="brand" href="#">ReviseMyVerb</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li <?php if($onglet=="accueil") echo 'class="active"'; ?>><a href="index.php">Accueil</a></li>
@@ -41,6 +50,7 @@ require_once("bdd.php");
               <ul class="nav pull-right">
                   <li <?php if($onglet=="liste") echo 'class="active"'; ?>><a href="listeVerbes.php">Liste des verbes</a></li>
                   <li <?php if($onglet=="apprendre") echo 'class="active"'; ?>><a href="apprendreVerbes.php">Apprendre des verbes</a></li>
+                  <li <?php if($onglet=="stat") echo 'class="active"'; ?>><a href="statistiques.php">Statistiques</a></li>
                   <li <?php if($onglet=="param") echo 'class="active"'; ?>><a href="parametres.php">Paramètres</a></li>
                   <li><a href="deconnexion.php">Se déconnecter</a></li>
               </ul>

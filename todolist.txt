@@ -1,6 +1,4 @@
 FINIR CREATIVITE NUMERIQUE
---> stat
-pagination pour la liste des verbes ? 
-ajout d'un deuxieme mode de test ?
-ajout apprendre si bonne réponse
-
+--> stat (en cours) faire des graphiques d'évolutions (prevu)
+pagination pour la liste des verbes ? non retenu
+ajout d'un deuxieme mode de test ? non retenu amélioration possible
