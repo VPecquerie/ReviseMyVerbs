@@ -2,6 +2,7 @@
 $titre = "Apprendre des verbes";
 $onglet = "apprendre";
 require_once 'includes/haut.php';
+is_connecte();
 if(isset($_GET['action']))
 $action = $_GET['action'];
 else 
@@ -334,8 +335,7 @@ switch($action)
            <?php
         break;
     default:        
-        $requete = "SELECT * FROM verbes WHERE RAND() > 0.9 AND v_id NOT IN(SELECT v_id FROM apprendre WHERE u_id = ".intval($_SESSION['id'])." and v_id NOT IN(SELECT v_id FROM apprendre WHERE u_id = ".intval($_SESSION['id'])." AND nb_vu > 5)) LIMIT 0,10";
-       
+        $requete = 'SELECT * FROM verbes WHERE RAND() > 0.9 AND v_id NOT IN	(SELECT v_id FROM apprendre WHERE u_id = '.$_SESSION['id'].' AND nb_vu > 5) LIMIT 0,10';
         $retour = $connexion->query($requete);
         $retour->setFetchMode(PDO::FETCH_ASSOC)or die("Action impossible !");
         $_SESSION['listeVerbe'] = $retour->fetchAll();
